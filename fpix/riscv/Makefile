@@ -38,7 +38,8 @@ ifeq (0, $(words $(findstring $(MAKECMDGOALS), $(NODEPS))))
 -include $(ALL_DEPS)
 endif
 
-$(DEP_DIR)/%.d: %.cc
+# load_program_options.cc includes generated inc/usage.h; g++ -MM must run after it exists.
+$(DEP_DIR)/%.d: %.cc inc/usage.h
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC_PATHS) -MM -MT '$(patsubst $(DEP_DIR)/%.d,$(OBJ_DIR)/%.o,$@)' $< -MF $@
 
@@ -57,6 +58,7 @@ clean:
 	rm -rf make_area ../bin/fpix_riscv *.S *.ELF *.log *.railhouse inc/usage.h
 
 inc/usage.h:  README.txt ../utils/readme2usage.py
+	@mkdir -p inc
 	cat README.txt | ../utils/readme2usage.py >inc/usage.h
 
 .PHONY: test

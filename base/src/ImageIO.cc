@@ -27,7 +27,6 @@
 #include "Memory.h"
 #include "Register.h"
 #include "StringUtils.h"
-
 /*!
   \file ImageIO.cc
   \brief Code for Image IO module

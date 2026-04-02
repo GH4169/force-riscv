@@ -60,7 +60,8 @@ else
     PYTHON_LIB_TYPE=
 endif
 
-CFLAGS = -Wall -std=c++11 -gdwarf-3 -m64 -Werror $(OPTIMIZATION) $(PICKY_FLAGS) $(VISIBILITY) -D $(ARCH_ENUM_HEADER)
+# CFLAGS = -Wall -std=c++11 -gdwarf-3 -m64 -Werror $(OPTIMIZATION) $(PICKY_FLAGS) $(VISIBILITY) -D $(ARCH_ENUM_HEADER) -Wno-error=deprecated-declarations
+CFLAGS = -Wall -std=c++11 -gdwarf-3 -m64 $(OPTIMIZATION) $(PICKY_FLAGS) $(VISIBILITY) -D $(ARCH_ENUM_HEADER)
 LFLAGS = -lpthread -static-libstdc++ -static-libgcc -L$(PYTHON_LIB) -lpython$(PYTHON_VER)$(PYTHON_LIB_TYPE) -lutil -ldl -rdynamic
 
 ALL_OBJS := $(ALL_SRCS:%.cc=$(OBJ_DIR)/%.o)
